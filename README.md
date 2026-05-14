@@ -1,16 +1,24 @@
-# React + Vite
+# VibeCoder Academy
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Образовательная платформа для вайбкодеров — людей, которые работают в IT-командах, используют AI для написания кода, но хотят понимать процессы разработки изнутри.
 
-Currently, two official plugins are available:
+## Что внутри
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Онбординг с персонализацией (имя, должность)
+- 5 глав курса: от основ IT до эффективной работы с командой
+- Отслеживание прогресса (localStorage)
+- Чистый минималистичный дизайн
+- Адаптивная вёрстка
 
-## React Compiler
+## Запуск локально
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+## Деплой
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Автоматически через GitHub Actions на GitHub Pages при пуше в `main`.
+
+Сайт: https://alex-dolganov.github.io/vibe-learning/

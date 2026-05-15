@@ -22,9 +22,21 @@ export default function App() {
     setUser(null)
   }
 
-  if (!user) {
-    return <Onboarding onComplete={handleOnboardingComplete} />
-  }
-
-  return <CourseLayout user={user} onReset={handleReset} />
+  return (
+    <>
+      <video
+        className="bgVideo"
+        autoPlay
+        muted
+        loop
+        playsInline
+        src={`${import.meta.env.BASE_URL}bg.mp4`}
+      />
+      <div className="bgOverlay" />
+      {!user
+        ? <Onboarding onComplete={handleOnboardingComplete} />
+        : <CourseLayout user={user} onReset={handleReset} />
+      }
+    </>
+  )
 }

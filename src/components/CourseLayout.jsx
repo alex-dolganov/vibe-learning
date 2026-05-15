@@ -38,7 +38,6 @@ export default function CourseLayout({ user, onReset }) {
             <span />
           </button>
           <div className={styles.logo}>
-            <span className={styles.logoMark}>VC</span>
             <span className={styles.logoName}>VibeCoder Academy</span>
           </div>
         </div>
@@ -61,6 +60,7 @@ export default function CourseLayout({ user, onReset }) {
           chapters={courseData}
           activeLesson={activeLesson}
           completed={completed}
+          isOpen={sidebarOpen}
           onSelect={(lesson) => {
             setActiveLesson(lesson)
             setSidebarOpen(false)

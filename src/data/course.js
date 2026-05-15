@@ -2,7 +2,6 @@ export const courseData = [
   {
     id: 1,
     title: "Введение в IT разработку",
-    icon: "🏗️",
     lessons: [
       {
         id: "1-1",
@@ -101,7 +100,6 @@ export const courseData = [
   {
     id: 2,
     title: "Этапы разработки",
-    icon: "🔄",
     lessons: [
       {
         id: "2-1",
@@ -234,7 +232,6 @@ QA-инженер проверяет, что всё работает как за
   {
     id: 3,
     title: "Git — система контроля версий",
-    icon: "🌿",
     lessons: [
       {
         id: "3-1",
@@ -363,7 +360,6 @@ commit 9c3d5f1  chore: update dependencies
   {
     id: 4,
     title: "Технический язык IT",
-    icon: "💬",
     lessons: [
       {
         id: "4-1",
@@ -504,7 +500,6 @@ API — одно из самых часто упоминаемых слов в I
   {
     id: 5,
     title: "Вайбкодер в команде",
-    icon: "🚀",
     lessons: [
       {
         id: "5-1",

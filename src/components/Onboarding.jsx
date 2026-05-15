@@ -38,7 +38,6 @@ export default function Onboarding({ onComplete }) {
     <div className={styles.wrap}>
       <div className={styles.card}>
         <div className={styles.logo}>
-          <span className={styles.logoMark}>VC</span>
           <span className={styles.logoText}>VibeCoder Academy</span>
         </div>
 

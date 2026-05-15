@@ -34,11 +34,11 @@ export default function LessonContent({ lesson, isCompleted, onComplete, onNext,
       <div className={styles.footer}>
         {!isCompleted && (
           <button className={styles.completeBtn} onClick={onComplete}>
-            Отметить как пройденное ✓
+            Отметить как пройденное
           </button>
         )}
         {isCompleted && (
-          <span className={styles.completedBadge}>✓ Пройдено</span>
+          <span className={styles.completedBadge}>Пройдено</span>
         )}
 
         <div className={styles.nav}>

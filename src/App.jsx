@@ -31,6 +31,7 @@ export default function App() {
         loop
         playsInline
         src={`${import.meta.env.BASE_URL}bg.mp4`}
+        onEnded={e => { e.target.currentTime = 0; e.target.play() }}
       />
       <div className="bgOverlay" />
       {!user

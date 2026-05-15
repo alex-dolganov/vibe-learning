@@ -13,9 +13,9 @@
   --border-accent:  rgba(59, 130, 246, 0.45);
   --border-hover:   rgba(255, 255, 255, 0.16);
 
-  --text-primary:   #eef2ff;
-  --text-secondary: rgba(238, 242, 255, 0.55);
-  --text-muted:     rgba(238, 242, 255, 0.32);
+  --text-primary:   #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.80);
+  --text-muted:     rgba(255, 255, 255, 0.55);
 
   --accent:         #3b82f6;
   --accent-2:       #8b5cf6;
@@ -69,7 +69,7 @@ body {
   position: fixed;
   inset: 0;
   z-index: 1;
-  background: rgba(2, 2, 12, 0.72);
+  background: rgba(2, 2, 12, 0.55);
   pointer-events: none;
 }
 

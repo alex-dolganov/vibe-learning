@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import Sidebar from './Sidebar'
 import LessonContent from './LessonContent'
 import { courseData } from '../data/course'
@@ -43,15 +44,18 @@ export default function CourseLayout({ user, onReset }) {
         </div>
         <div className={styles.headerCenter}>
           <div className={styles.progressBar}>
-            <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+            <motion.div
+              className={styles.progressFill}
+              animate={{ width: `${progress}%` }}
+              transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
+              style={{ width: `${progress}%` }}
+            />
           </div>
           <span className={styles.progressLabel}>{progress}% пройдено</span>
         </div>
         <div className={styles.headerRight}>
           <span className={styles.userName}>{user.name}</span>
-          <button className={styles.resetBtn} onClick={onReset} title="Начать заново">
-            ↩
-          </button>
+          <button className={styles.resetBtn} onClick={onReset} title="Начать заново">↩</button>
         </div>
       </header>
 
@@ -67,19 +71,35 @@ export default function CourseLayout({ user, onReset }) {
           }}
         />
         <main className={styles.main}>
-          <LessonContent
-            lesson={activeLesson}
-            isCompleted={completed.includes(activeLesson.id)}
-            onComplete={() => markComplete(activeLesson.id)}
-            onNext={nextLesson ? () => setActiveLesson(nextLesson) : null}
-            onPrev={prevLesson ? () => setActiveLesson(prevLesson) : null}
-            nextTitle={nextLesson?.title}
-          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeLesson.id}
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            >
+              <LessonContent
+                lesson={activeLesson}
+                isCompleted={completed.includes(activeLesson.id)}
+                onComplete={() => markComplete(activeLesson.id)}
+                onNext={nextLesson ? () => setActiveLesson(nextLesson) : null}
+                onPrev={prevLesson ? () => setActiveLesson(prevLesson) : null}
+                nextTitle={nextLesson?.title}
+              />
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
 
       {sidebarOpen && (
-        <div className={styles.overlay} onClick={() => setSidebarOpen(false)} />
+        <motion.div
+          className={styles.overlay}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSidebarOpen(false)}
+        />
       )}
     </div>
   )

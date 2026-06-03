@@ -48,7 +48,6 @@
     0 0 0 1px rgba(59,130,246,0.08),
     0 32px 64px rgba(0,0,0,0.6),
     inset 0 1px 0 rgba(255,255,255,0.07);
-  animation: fadeInUp 0.5s ease both;
 }
 
 .card::before {
@@ -102,7 +101,11 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  animation: fadeIn 0.35s ease both;
+}
+
+.stepWrap {
+  position: relative;
+  min-height: 280px;
 }
 
 .title {
@@ -221,8 +224,33 @@
   color: #fff;
 }
 
+.btnRow {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btnBack {
+  padding: 13px 18px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 10px;
+  font-size: 13px;
+  font-family: 'Space Grotesk', sans-serif;
+  color: rgba(255,255,255,0.70);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.btnBack:hover {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.95);
+  border-color: rgba(255,255,255,0.18);
+}
+
 .btn {
-  width: 100%;
+  flex: 1;
   padding: 13px 16px;
   background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
   background-size: 200% 200%;

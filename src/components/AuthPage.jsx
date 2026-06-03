@@ -36,9 +36,10 @@ export default function AuthPage() {
     setLoading('email')
     reset()
 
+    const redirectTo = `${window.location.origin}${import.meta.env.BASE_URL}`
     const { error } = tab === 'login'
       ? await supabase.auth.signInWithPassword({ email, password })
-      : await supabase.auth.signUp({ email, password })
+      : await supabase.auth.signUp({ email, password, options: { emailRedirectTo: redirectTo } })
 
     if (error) setError(errorText(error.message))
     else if (tab === 'register') setSuccess('Проверь почту — отправили ссылку для подтверждения')

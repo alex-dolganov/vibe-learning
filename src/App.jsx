@@ -8,25 +8,28 @@ import Background from './components/Background'
 import './App.css'
 
 export default function App() {
-  const [session, setSession] = useState(null)
+  // undefined = still checking, null = not logged in, object = logged in
+  const [session, setSession] = useState(undefined)
   const [userData, setUserData] = useState(null)
-  const [authLoading, setAuthLoading] = useState(true)
 
   useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-      if (session) {
-        const saved = localStorage.getItem(`vibecoder_user_${session.user.id}`)
-        if (saved) setUserData(JSON.parse(saved))
-      }
-      setAuthLoading(false)
-    })
+    // Get initial session
+    supabase.auth.getSession()
+      .then(({ data: { session } }) => {
+        setSession(session ?? null)
+        if (session) {
+          const saved = localStorage.getItem(`vibecoder_user_${session.user.id}`)
+          if (saved) setUserData(JSON.parse(saved))
+        }
+      })
+      .catch(() => setSession(null))
 
+    // Listen for auth changes (fires on login/logout/OAuth redirect)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
+      setSession(session ?? null)
       if (session) {
         const saved = localStorage.getItem(`vibecoder_user_${session.user.id}`)
-        if (saved) setUserData(JSON.parse(saved))
+        setUserData(saved ? JSON.parse(saved) : null)
       } else {
         setUserData(null)
       }
@@ -51,7 +54,6 @@ export default function App() {
     setUserData(null)
   }
 
-  // Pre-fill name from OAuth provider (GitHub / Google)
   const initialName = session?.user?.user_metadata?.full_name
     || session?.user?.user_metadata?.name
     || session?.user?.user_metadata?.user_name
@@ -59,36 +61,48 @@ export default function App() {
 
   const userId = session?.user?.id ?? null
 
+  // session=undefined means still loading — show AuthPage anyway (best UX)
+  const showAuth = !session
+  const showOnboarding = session && !userData
+  const showCourse = session && userData
+
   return (
     <>
       <Background />
       <AnimatePresence mode="wait">
-        {authLoading && (
+        {showAuth && (
           <motion.div
-            key="loading"
-            className="loadingScreen"
+            key="auth"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
           >
-            <div className="loadingSpinner" />
-          </motion.div>
-        )}
-
-        {!authLoading && !session && (
-          <motion.div key="auth" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
             <AuthPage />
           </motion.div>
         )}
 
-        {!authLoading && session && !userData && (
-          <motion.div key="onboarding" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}>
+        {showOnboarding && (
+          <motion.div
+            key="onboarding"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+          >
             <Onboarding onComplete={handleOnboardingComplete} initialName={initialName} />
           </motion.div>
         )}
 
-        {!authLoading && session && userData && (
-          <motion.div key="course" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }} style={{ height: '100vh' }}>
+        {showCourse && (
+          <motion.div
+            key="course"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            style={{ height: '100vh' }}
+          >
             <CourseLayout
               user={userData}
               userId={userId}

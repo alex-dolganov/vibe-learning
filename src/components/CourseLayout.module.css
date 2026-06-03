@@ -143,6 +143,21 @@
   background: rgba(239,68,68,0.08);
 }
 
+.logoutBtn {
+  background: none;
+  border: none;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  color: rgba(255,255,255,0.40);
+  transition: color 0.2s;
+}
+
+.logoutBtn:hover {
+  color: rgba(255,255,255,0.75);
+}
+
 /* ── Body ── */
 .body {
   display: flex;

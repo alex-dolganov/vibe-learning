@@ -21,10 +21,10 @@ const stepVariants = {
   exit: (dir) => ({ opacity: 0, x: dir > 0 ? -32 : 32 }),
 }
 
-export default function Onboarding({ onComplete }) {
+export default function Onboarding({ onComplete, initialName = '' }) {
   const [step, setStep] = useState(1)
   const [dir, setDir] = useState(1)
-  const [name, setName] = useState('')
+  const [name, setName] = useState(initialName)
   const [role, setRole] = useState('')
   const [customRole, setCustomRole] = useState('')
   const [goal, setGoal] = useState('')

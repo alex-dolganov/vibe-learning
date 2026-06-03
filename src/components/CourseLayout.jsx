@@ -5,10 +5,11 @@ import LessonContent from './LessonContent'
 import { courseData } from '../data/course'
 import styles from './CourseLayout.module.css'
 
-export default function CourseLayout({ user, onReset }) {
+export default function CourseLayout({ user, userId, onReset, onLogout }) {
   const [activeLesson, setActiveLesson] = useState(courseData[0].lessons[0])
   const [completed, setCompleted] = useState(() => {
-    const saved = localStorage.getItem('vibecoder_progress')
+    const key = userId ? `vibecoder_progress_${userId}` : 'vibecoder_progress'
+    const saved = localStorage.getItem(key)
     return saved ? JSON.parse(saved) : []
   })
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -20,7 +21,8 @@ export default function CourseLayout({ user, onReset }) {
     if (!completed.includes(lessonId)) {
       const next = [...completed, lessonId]
       setCompleted(next)
-      localStorage.setItem('vibecoder_progress', JSON.stringify(next))
+      const key = userId ? `vibecoder_progress_${userId}` : 'vibecoder_progress'
+      localStorage.setItem(key, JSON.stringify(next))
     }
   }
 
@@ -34,14 +36,13 @@ export default function CourseLayout({ user, onReset }) {
       <header className={styles.header}>
         <div className={styles.headerLeft}>
           <button className={styles.menuBtn} onClick={() => setSidebarOpen(!sidebarOpen)}>
-            <span />
-            <span />
-            <span />
+            <span /><span /><span />
           </button>
           <div className={styles.logo}>
             <span className={styles.logoName}>VibeCoder Academy</span>
           </div>
         </div>
+
         <div className={styles.headerCenter}>
           <div className={styles.progressBar}>
             <motion.div
@@ -53,9 +54,11 @@ export default function CourseLayout({ user, onReset }) {
           </div>
           <span className={styles.progressLabel}>{progress}% пройдено</span>
         </div>
+
         <div className={styles.headerRight}>
           <span className={styles.userName}>{user.name}</span>
           <button className={styles.resetBtn} onClick={onReset} title="Начать заново">↩</button>
+          <button className={styles.logoutBtn} onClick={onLogout} title="Выйти">Выйти</button>
         </div>
       </header>
 

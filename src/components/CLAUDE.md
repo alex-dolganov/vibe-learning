@@ -43,11 +43,13 @@
 
 ## Dashboard.jsx
 
-Главный хаб после онбординга. Левый сайдбар-навигация + центральный контент + правая колонка.
+Главный хаб = shell с глобальным левым меню. Левый сайдбар + центральный контент + правая колонка (правая только в «Обучении»).
 
 **Пропы:** `{ user, userId, onLogout(), onReset(), onOpenLesson(lesson, chapter) }`
 
-Стейт `activeNav` переключает 4 внутренних вью (объявлены в этом же файле):
+Стейт `section` (`learning | notes | projects`) переключает разделы:
+- `notes` → `<NotesBoard userId />`, `projects` → `<ProjectsView userId />` (правая колонка скрыта, `shellWide`).
+- `learning` → стейт `activeNav` переключает 4 внутренних вью (объявлены в этом же файле):
 
 | Вью | Что показывает |
 |-----|----------------|
@@ -73,6 +75,32 @@
 - Контент урока через `<ReactMarkdown>` с кастомными компонентами тегов
 - «Отметить как пройденное» (`markComplete`) + навигация назад/вперёд между уроками
 - Навигация по плоскому массиву `allLessons = courseData.flatMap(...)`
+
+---
+
+## NotesBoard.jsx
+
+Канбан-доска заметок (раздел «Заметки»). Данные — Supabase через `lib/notes.js`.
+
+**Пропы:** `{ userId }`
+
+- 3 колонки: `idea / doing / done` (Идеи / В работе / Готово).
+- **Drag & drop** (framer-motion): на `onDragEnd` хит-тест по `getBoundingClientRect` колонок (refs в `columnRefs`) → меняет `status` + `position`.
+- Add/inline-edit (title+body)/delete; оптимистичный апдейт + запись в Supabase.
+- Состояния loading / error (если таблицы нет — подсказка про SQL).
+
+---
+
+## ProjectsView.jsx
+
+Галерея проектов + статистика (раздел «Мои проекты»). Данные — Supabase через `lib/projects.js`.
+
+**Пропы:** `{ userId }`
+
+- Шапка: донат-диаграмма стека (`Donut`, агрегирует `stack[]` всех проектов) + счётчики (`Counter`).
+- Карточки проектов: статус-бейдж, чипы стека (цвет детерминирован хэшем имени), ссылка.
+- Add/Edit через модалку (`AnimatePresence`): name, description, стек (tag-input), статус, ссылка.
+- Удаление через `window.confirm`. Цвета технологий — `TECH_PALETTE` + `techColor(name)`.
 
 ---
 

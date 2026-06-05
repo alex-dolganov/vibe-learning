@@ -33,9 +33,11 @@ const [readerChapter, setReaderChapter]
 ## Стейт в Dashboard.jsx
 
 ```js
-const [activeNav, setActiveNav]   // 'home' | 'progress' | 'profile' | 'achievements'
+const [section, setSection]       // 'learning' | 'notes' | 'projects' — глобальный раздел
+const [activeNav, setActiveNav]   // 'home' | 'progress' | 'profile' | 'achievements' (только learning)
 ```
 
+`section` переключает левое меню: `notes` → `NotesBoard`, `projects` → `ProjectsView`, `learning` → курс.
 Прогресс читается из localStorage синхронно при каждом рендере (`getCompleted(userId)`), не хранится в стейте — Dashboard не мутирует прогресс, только отображает.
 
 ## Стейт в Reader.jsx
@@ -48,9 +50,16 @@ const [sideOpen, setSideOpen]         // сайдбар-оглавление н�
 
 `markComplete(id)` дописывает урок в `completed` и сохраняет в `localStorage[vibecoder_progress_${userId}]`.
 
-## Авторизация
+## Авторизация и данные (Supabase)
 
 `lib/supabase.js` экспортирует единственный `supabase`-клиент. Используется в `App.jsx` (сессия) и `AuthPage.jsx` (вход/регистрация). Провайдеры: GitHub, Google (OAuth) и Email+пароль.
+
+Слой данных (async, через тот же клиент, RLS ограничивает строки юзером):
+- `lib/notes.js` — CRUD заметок (таблица `notes`).
+- `lib/projects.js` — CRUD проектов (таблица `projects`).
+- `lib/progress.js` — активность для heatmap (localStorage, не Supabase).
+
+Схема таблиц — `supabase/migrations/0001_notes_projects.sql` (применяется вручную в Supabase SQL Editor).
 
 ## Добавить новый компонент
 

@@ -73,6 +73,16 @@ public/
 Переходы между экранами анимируются через `AnimatePresence mode="wait"`.
 Сессия отслеживается через `supabase.auth.onAuthStateChange`. Выход — `supabase.auth.signOut()`.
 
+### Разделы внутри Dashboard
+
+`Dashboard` — это shell с глобальным левым меню (стейт `section`):
+
+- **Обучение** (`learning`) — курс: под-навигация Главная/Прогресс/Профиль/Достижения + правая колонка.
+- **Заметки** (`notes`) — `NotesBoard`: канбан с drag&drop (framer-motion), хранится в Supabase.
+- **Мои проекты** (`projects`) — `ProjectsView`: галерея проектов + диаграмма стека, хранится в Supabase.
+
+Вне «Обучения» правая колонка скрыта (`shellWide`).
+
 ## localStorage
 
 Ключи **привязаны к Supabase user id** (`session.user.id`), чтобы данные разных аккаунтов не смешивались:
@@ -83,7 +93,16 @@ public/
 | `vibecoder_progress_${userId}` | массив строк — ID пройденных уроков (`"1-1"`, `"2-3"` и т.д.) |
 | `vibecoder_activity_${userId}` | `{ "ГГГГ-ММ-ДД": число }` — активность по дням для heatmap в профиле (см. `lib/progress.js`) |
 
-Профиль и прогресс хранятся **только в localStorage**, не в базе Supabase. Supabase отвечает лишь за аутентификацию.
+Профиль и прогресс курса хранятся **в localStorage**. Заметки и проекты — **в Supabase** (см. ниже).
+
+## Supabase: таблицы
+
+Кроме аутентификации, Supabase хранит данные разделов Заметки и Проекты. Схема — `supabase/migrations/0001_notes_projects.sql` (выполнить один раз в SQL Editor). Приватность — через RLS (`auth.uid() = user_id`), `user_id` дефолтится `auth.uid()`.
+
+| Таблица | Содержимое | Клиент |
+|---------|------------|--------|
+| `notes` | карточки канбана: `title, body, status(idea/doing/done), position, color` | `lib/notes.js` |
+| `projects` | проекты: `name, description, stack text[], status, link, color` | `lib/projects.js` |
 
 ## Видеофон
 

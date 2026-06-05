@@ -13,11 +13,11 @@ import styles from './Dashboard.module.css'
 const ACCENTS = ['blue', 'violet', 'amber', 'coral', 'teal']
 const CHAPTER_ICONS = [Flag, Layers, GitBranch, MessageSquare, Bot]
 const ACCENT_COLORS = {
-  blue:   { bg: '#2f6af6', text: '#fff', bar: 'rgba(255,255,255,.32)', fill: '#fff', soft: '#edf1ff', ink: '#2f6af6' },
-  violet: { bg: '#9b5fe6', text: '#fff', bar: 'rgba(255,255,255,.32)', fill: '#fff', soft: '#f2ecff', ink: '#9b5fe6' },
-  amber:  { bg: '#f59e0b', text: '#3d2e00', bar: 'rgba(0,0,0,.12)', fill: '#3d2e00', soft: '#fff8e6', ink: '#b45309' },
-  coral:  { bg: '#f0644c', text: '#fff', bar: 'rgba(255,255,255,.32)', fill: '#fff', soft: '#fef0ed', ink: '#f0644c' },
-  teal:   { bg: '#14b8a6', text: '#fff', bar: 'rgba(255,255,255,.32)', fill: '#fff', soft: '#e6f9f7', ink: '#14b8a6' },
+  blue:   { bg: '#7b9fd4', text: '#213b5e', bar: 'rgba(0,0,0,.12)', fill: '#213b5e', soft: '#eef3fb', ink: '#4d72ab' },
+  violet: { bg: '#a98fc9', text: '#3b2a52', bar: 'rgba(0,0,0,.12)', fill: '#3b2a52', soft: '#f3eefa', ink: '#7a5fa0' },
+  amber:  { bg: '#e0b87a', text: '#4d3a14', bar: 'rgba(0,0,0,.12)', fill: '#4d3a14', soft: '#fbf3e3', ink: '#a87f3c' },
+  coral:  { bg: '#e09a8c', text: '#5a2b22', bar: 'rgba(0,0,0,.12)', fill: '#5a2b22', soft: '#fbeeeb', ink: '#b56a59' },
+  teal:   { bg: '#79bdb2', text: '#1d3f39', bar: 'rgba(0,0,0,.12)', fill: '#1d3f39', soft: '#e9f5f3', ink: '#4a9387' },
 }
 
 const NAV = [

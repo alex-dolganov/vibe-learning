@@ -36,12 +36,12 @@
 }
 
 .logoName {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 17px;
   line-height: 1;
   letter-spacing: -.02em;
   color: var(--blue);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   white-space: nowrap;
 }
 
@@ -101,15 +101,15 @@
   font-size: 12.5px;
   color: rgba(255,255,255,.7);
   font-weight: 600;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .sideCardBig {
   font-size: 32px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.02em;
   line-height: 1;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .sideCardBig span {
@@ -135,7 +135,7 @@
   display: grid;
   place-items: center;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 600;
   transition: transform .15s;
 }
 
@@ -156,10 +156,10 @@
 .mainH1 {
   margin: 0;
   font-size: 27px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.025em;
   color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .mainDate {
@@ -179,11 +179,11 @@
 
 .sectionH {
   font-size: 19px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.02em;
   margin: 0;
   color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 /* ── Chapter cards ── */
@@ -236,7 +236,7 @@
 .chBadge b {
   display: block;
   font-size: 21px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
   color: var(--ac);
 }
@@ -258,10 +258,10 @@
 
 .chTitle {
   font-size: 21px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.02em;
   margin: 3px 0;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .chFoot {
@@ -289,7 +289,7 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 13.5px;
   white-space: nowrap;
   opacity: .9;
@@ -305,10 +305,10 @@
 
 .progressOverallNum {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue);
   letter-spacing: -.03em;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   line-height: 1;
 }
 
@@ -328,7 +328,7 @@
 .progressOverallFill {
   height: 100%;
   border-radius: 99px;
-  background: linear-gradient(90deg, #2f6af6, #9b5fe6);
+  background: linear-gradient(90deg, #5e7fb8, #9a86c4);
 }
 
 .progressChap {
@@ -357,15 +357,15 @@
 
 .progressChapTitle {
   flex: 1;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .progressChapPct {
   font-size: 14px;
-  font-weight: 800;
+  font-weight: 700;
   font-family: var(--mono);
 }
 
@@ -411,23 +411,23 @@
   width: 72px;
   height: 72px;
   border-radius: 20px;
-  background: linear-gradient(150deg, #2f6af6, #9b5fe6);
+  background: linear-gradient(150deg, #5e7fb8, #9a86c4);
   color: #fff;
   display: grid;
   place-items: center;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 24px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin-bottom: 16px;
   box-shadow: 0 12px 26px -10px rgba(47,106,246,.5);
 }
 
 .profileName {
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--ink);
   letter-spacing: -.02em;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .profileRole {
@@ -455,9 +455,9 @@
 
 .profileStatNum {
   font-size: 36px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--blue);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   letter-spacing: -.02em;
 }
 
@@ -517,9 +517,9 @@
 
 .achieveTitle {
   font-size: 16px;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   margin-bottom: 6px;
 }
 
@@ -548,7 +548,7 @@
 
 .userChipName {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink);
   text-align: right;
 }
@@ -564,13 +564,13 @@
   width: 42px;
   height: 42px;
   border-radius: 13px;
-  background: linear-gradient(150deg, #2f6af6, #9b5fe6);
+  background: linear-gradient(150deg, #5e7fb8, #9a86c4);
   color: #fff;
   display: grid;
   place-items: center;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 15px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   flex-shrink: 0;
 }
 
@@ -614,7 +614,7 @@
 
 .continueName {
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink);
   white-space: nowrap;
   overflow: hidden;
@@ -643,7 +643,7 @@
   display: grid;
   place-items: center;
   font-size: 10px;
-  font-weight: 800;
+  font-weight: 700;
   font-family: var(--mono);
 }
 
@@ -663,9 +663,9 @@
 .planDay {
   text-align: center;
   font-size: 11.5px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink-3);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   padding: 4px 0;
 }
 
@@ -691,7 +691,7 @@
   justify-content: center;
   padding: 6px 4px;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 600;
   text-align: center;
   cursor: pointer;
   line-height: 1.3;

@@ -7,11 +7,11 @@ import styles from './Reader.module.css'
 
 const ACCENTS = ['blue', 'violet', 'amber', 'coral', 'teal']
 const ACCENT_COLORS = {
-  blue:   { dot: '#2f6af6', soft: '#edf1ff', ink: '#2f6af6' },
-  violet: { dot: '#9b5fe6', soft: '#f2ecff', ink: '#9b5fe6' },
-  amber:  { dot: '#f59e0b', soft: '#fff8e6', ink: '#b45309' },
-  coral:  { dot: '#f0644c', soft: '#fef0ed', ink: '#f0644c' },
-  teal:   { dot: '#14b8a6', soft: '#e6f9f7', ink: '#14b8a6' },
+  blue:   { dot: '#7b9fd4', soft: '#eef3fb', ink: '#4d72ab' },
+  violet: { dot: '#a98fc9', soft: '#f3eefa', ink: '#7a5fa0' },
+  amber:  { dot: '#e0b87a', soft: '#fbf3e3', ink: '#a87f3c' },
+  coral:  { dot: '#e09a8c', soft: '#fbeeeb', ink: '#b56a59' },
+  teal:   { dot: '#79bdb2', soft: '#e9f5f3', ink: '#4a9387' },
 }
 
 function getCompleted(userId) {

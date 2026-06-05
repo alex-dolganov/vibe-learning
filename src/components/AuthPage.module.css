@@ -18,7 +18,7 @@
 
 /* ── Left promo ── */
 .promo {
-  background: linear-gradient(160deg, #2f6af6, #6b5bff 70%, #9b5fe6);
+  background: linear-gradient(160deg, #5e7fb8, #7d72b0 70%, #9a86c4);
   color: #fff;
   padding: 44px 42px;
   display: flex;
@@ -64,7 +64,7 @@
 }
 
 .logoName {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 16px;
   letter-spacing: -.02em;
   color: #fff;
@@ -82,11 +82,11 @@
 .promoH {
   font-size: 34px;
   line-height: 1.12;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.025em;
   margin: 0;
   position: relative;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .promoSub {
@@ -151,7 +151,7 @@
 .featTitle {
   margin: 0;
   font-size: 14.5px;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
 }
 
@@ -173,10 +173,10 @@
 .formH {
   margin: 0 0 5px;
   font-size: 26px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.02em;
   color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .formLead {
@@ -249,7 +249,7 @@
   font-size: 13px;
   color: var(--ink-2);
   font-weight: 600;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .input {
@@ -308,8 +308,8 @@
   border: none;
   border-radius: 13px;
   font-size: 15px;
-  font-weight: 700;
-  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
   cursor: pointer;
   box-shadow: 0 12px 26px -12px rgba(47,106,246,.85);
   transition: box-shadow .22s, transform .14s;
@@ -334,7 +334,7 @@
   border: none;
   color: var(--blue);
   cursor: pointer;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
   padding: 0;
   font-family: 'Inter', sans-serif;

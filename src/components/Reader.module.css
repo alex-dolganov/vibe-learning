@@ -39,11 +39,11 @@
 .iconBtn:hover { background: #eef0f6; color: var(--ink); }
 
 .topTitle {
-  font-weight: 800;
+  font-weight: 700;
   font-size: 15px;
   letter-spacing: -.01em;
   color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   flex-shrink: 0;
   max-width: 200px;
 }
@@ -84,12 +84,12 @@
 .topBarFill {
   height: 100%;
   border-radius: 99px;
-  background: linear-gradient(90deg, #2f6af6, #9b5fe6);
+  background: linear-gradient(90deg, #5e7fb8, #9a86c4);
 }
 
 .topPct {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink-2);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
@@ -100,13 +100,13 @@
   width: 36px;
   height: 36px;
   border-radius: 11px;
-  background: linear-gradient(150deg, #2f6af6, #9b5fe6);
+  background: linear-gradient(150deg, #5e7fb8, #9a86c4);
   color: #fff;
   display: grid;
   place-items: center;
-  font-weight: 800;
+  font-weight: 700;
   font-size: 13px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   flex-shrink: 0;
   margin-left: auto;
 }
@@ -140,10 +140,10 @@
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--ink-3);
-  font-weight: 700;
+  font-weight: 600;
   padding: 0 12px;
   margin-bottom: 7px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .chapDot {
@@ -177,7 +177,7 @@
 .lessonActive {
   background: var(--blue-soft) !important;
   color: var(--blue) !important;
-  font-weight: 700 !important;
+  font-weight: 600 !important;
 }
 
 .tick {
@@ -191,7 +191,7 @@
   border: 1.8px solid var(--line-2);
   color: transparent;
   transition: all .2s;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .tickDone {
@@ -248,25 +248,25 @@
 .md :global(h1) {
   font-size: clamp(26px, 4vw, 34px);
   line-height: 1.12;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.025em;
   margin: 0 0 .5em;
-  background: linear-gradient(100deg, #2f6af6, #9b5fe6);
+  background: linear-gradient(100deg, #5e7fb8, #9a86c4);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .md :global(h2) {
   font-size: 21px;
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -.015em;
   margin: 1.8em 0 .65em;
   padding-left: 14px;
   position: relative;
   color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .md :global(h2)::before {
@@ -282,15 +282,15 @@
 
 .md :global(h3) {
   font-size: 17px;
-  font-weight: 700;
+  font-weight: 600;
   margin: 1.5em 0 .5em;
   color: var(--ink);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .md :global(p) { margin: 0 0 1.05em; }
 
-.md :global(strong) { color: var(--ink); font-weight: 700; }
+.md :global(strong) { color: var(--ink); font-weight: 600; }
 
 .md :global(ul),
 .md :global(ol) { margin: 0 0 1.1em; padding-left: 1.4em; }
@@ -350,11 +350,11 @@
 .md :global(th) {
   background: var(--panel-2);
   text-align: left;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ink);
   padding: 11px 16px;
   border-bottom: 1px solid var(--line-2);
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
 }
 
 .md :global(td) {
@@ -393,8 +393,8 @@
   border: none;
   border-radius: 13px;
   font-size: 14px;
-  font-weight: 700;
-  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
   cursor: pointer;
   box-shadow: 0 12px 26px -12px rgba(47,106,246,.85);
   align-self: flex-start;
@@ -412,8 +412,8 @@
   color: #166534;
   border-radius: 12px;
   font-size: 13px;
-  font-weight: 700;
-  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
   border: 1.5px solid #bbf7d0;
   align-self: flex-start;
 }
@@ -433,7 +433,7 @@
   background: var(--panel-2);
   border-radius: 13px;
   font-size: 14px;
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-weight: 600;
   cursor: pointer;
   color: var(--ink);
@@ -453,8 +453,8 @@
   border: none;
   border-radius: 13px;
   font-size: 14px;
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
   cursor: pointer;
   max-width: 300px;
   overflow: hidden;

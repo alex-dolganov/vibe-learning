@@ -9,7 +9,7 @@ export default function Logo({ size = 34, variant = 'color', className }) {
   const gid = useId()
   const isColor = variant === 'color'
   const barFill = isColor ? `url(#${gid})` : '#fff'
-  const chevronFill = isColor ? '#3ab6ff' : '#fff'
+  const chevronFill = isColor ? '#6f9bce' : '#fff'
 
   return (
     <svg
@@ -24,8 +24,8 @@ export default function Logo({ size = 34, variant = 'color', className }) {
       {isColor && (
         <defs>
           <linearGradient id={gid} x1="8" y1="19" x2="34" y2="39" gradientUnits="userSpaceOnUse">
-            <stop stopColor="#9b5fe6" />
-            <stop offset="1" stopColor="#2f6af6" />
+            <stop stopColor="#a98fc9" />
+            <stop offset="1" stopColor="#5e7fb8" />
           </linearGradient>
         </defs>
       )}

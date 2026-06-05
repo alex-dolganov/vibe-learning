@@ -16,6 +16,11 @@ dist-ssr
 /*.mp4
 !public/bg.mp4
 
+# Stray images dropped in project root (screenshots, etc.)
+/*.png
+/*.jpg
+/*.jpeg
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

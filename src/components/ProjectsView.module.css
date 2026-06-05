@@ -131,7 +131,7 @@
 /* ── Gallery ── */
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 16px;
 }
 
@@ -190,8 +190,14 @@
 .projDesc {
   font-size: 13.5px;
   color: var(--ink-2);
-  line-height: 1.5;
+  line-height: 1.55;
   margin: 0 0 14px;
+  white-space: pre-line;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }

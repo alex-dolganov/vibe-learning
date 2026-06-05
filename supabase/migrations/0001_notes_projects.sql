@@ -23,6 +23,9 @@ create policy "notes are private" on public.notes
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
 
+-- Табличные привилегии для роли залогиненного пользователя (RLS всё равно ограничивает строки).
+grant select, insert, update, delete on public.notes to authenticated;
+
 create index if not exists notes_user_idx on public.notes (user_id, status, position);
 
 -- ── PROJECTS ──
@@ -46,5 +49,7 @@ create policy "projects are private" on public.projects
   for all
   using (auth.uid() = user_id)
   with check (auth.uid() = user_id);
+
+grant select, insert, update, delete on public.projects to authenticated;
 
 create index if not exists projects_user_idx on public.projects (user_id, created_at desc);

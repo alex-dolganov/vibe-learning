@@ -22,12 +22,14 @@ export default function NotesBoard({ userId }) {
 
   useEffect(() => {
     let active = true
-    getNotes().then(({ data, error }) => {
-      if (!active) return
-      if (error) setError(error.message)
-      else setNotes(data || [])
-      setLoading(false)
-    })
+    getNotes()
+      .then(({ data, error }) => {
+        if (!active) return
+        if (error) setError(error.message)
+        else setNotes(data || [])
+      })
+      .catch(e => { if (active) setError(e?.message || String(e)) })
+      .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
   }, [userId])
 

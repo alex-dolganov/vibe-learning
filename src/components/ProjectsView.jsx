@@ -34,12 +34,14 @@ export default function ProjectsView({ userId }) {
 
   useEffect(() => {
     let active = true
-    getProjects().then(({ data, error }) => {
-      if (!active) return
-      if (error) setError(error.message)
-      else setProjects(data || [])
-      setLoading(false)
-    })
+    getProjects()
+      .then(({ data, error }) => {
+        if (!active) return
+        if (error) setError(error.message)
+        else setProjects(data || [])
+      })
+      .catch(e => { if (active) setError(e?.message || String(e)) })
+      .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
   }, [userId])
 

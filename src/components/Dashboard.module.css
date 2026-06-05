@@ -11,6 +11,10 @@
   overflow: hidden;
 }
 
+.shellWide {
+  grid-template-columns: 232px minmax(0, 1fr);
+}
+
 /* ── Left sidebar ── */
 .side {
   border-right: 1px solid var(--line);
@@ -49,8 +53,25 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-  margin-top: 26px;
-  flex: 1;
+  margin-top: 22px;
+}
+
+.navGroupLabel {
+  margin: 22px 14px 0;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  font-weight: 600;
+}
+
+.navGroupLabel + .navList {
+  margin-top: 8px;
+}
+
+.navSub {
+  padding: 10px 14px;
+  font-size: 13.5px;
 }
 
 .navItem {

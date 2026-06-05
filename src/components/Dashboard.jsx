@@ -5,11 +5,20 @@ import {
   Flag, Layers, GitBranch, MessageSquare, Bot,
   Zap, Flame, Lock, PartyPopper,
   ArrowRight, RotateCcw,
+  GraduationCap, StickyNote, FolderKanban,
 } from 'lucide-react'
 import { courseData } from '../data/course'
 import { getActivity, localDayKey } from '../lib/progress'
 import Logo from './Logo'
+import NotesBoard from './NotesBoard'
+import ProjectsView from './ProjectsView'
 import styles from './Dashboard.module.css'
+
+const SECTIONS = [
+  { id: 'learning', Icon: GraduationCap, label: 'Обучение' },
+  { id: 'notes',    Icon: StickyNote,   label: 'Заметки' },
+  { id: 'projects', Icon: FolderKanban, label: 'Мои проекты' },
+]
 
 const ACCENTS = ['blue', 'violet', 'amber', 'coral', 'teal']
 const CHAPTER_ICONS = [Flag, Layers, GitBranch, MessageSquare, Bot]
@@ -59,6 +68,7 @@ function getTodayLabel() {
 }
 
 export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesson }) {
+  const [section, setSection] = useState('learning')
   const [activeNav, setActiveNav] = useState('home')
   const completed = getCompleted(userId)
   const totalLessons = courseData.reduce((a, c) => a + c.lessons.length, 0)
@@ -67,8 +77,10 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
   const allLessons = courseData.flatMap(ch => ch.lessons.map(l => ({ ...l, chapter: ch })))
   const nextLessons = allLessons.filter(l => !completed.includes(l.id)).slice(0, 3)
 
+  const isLearning = section === 'learning'
+
   return (
-    <div className={styles.shell}>
+    <div className={`${styles.shell} ${isLearning ? '' : styles.shellWide}`}>
       {/* ── Left sidebar ── */}
       <aside className={styles.side}>
         <div className={styles.logo}>
@@ -77,11 +89,11 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
         </div>
 
         <nav className={styles.navList}>
-          {NAV.map(item => (
+          {SECTIONS.map(item => (
             <motion.button key={item.id}
-              className={`${styles.navItem} ${activeNav === item.id ? styles.navActive : ''}`}
-              onClick={() => setActiveNav(item.id)}
-              whileHover={activeNav !== item.id ? { backgroundColor: 'var(--panel-2)' } : {}}
+              className={`${styles.navItem} ${section === item.id ? styles.navActive : ''}`}
+              onClick={() => setSection(item.id)}
+              whileHover={section !== item.id ? { backgroundColor: 'var(--panel-2)' } : {}}
               whileTap={{ scale: 0.98 }}>
               <span className={styles.navIco}><item.Icon size={18} strokeWidth={1.8} /></span>
               <span>{item.label}</span>
@@ -89,32 +101,53 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
           ))}
         </nav>
 
-        <div className={styles.sideCard}>
-          <p className={styles.sideCardLabel}>Прогресс курса</p>
-          <div className={styles.sideCardBig}>
-            {completed.length}<span>/ {totalLessons}</span>
-          </div>
-          <p className={styles.sideCardSub}>уроков пройдено</p>
-          <motion.button className={styles.sideCardCta}
-            onClick={() => {
-              const next = allLessons.find(l => !completed.includes(l.id))
-              if (next) onOpenLesson(next, next.chapter)
-            }}
-            whileHover={{ translateX: 3 }} whileTap={{ scale: 0.96 }}>
-            <ArrowRight size={18} strokeWidth={2} />
-          </motion.button>
-        </div>
+        {isLearning && (
+          <>
+            <div className={styles.navGroupLabel}>Курс</div>
+            <nav className={styles.navList}>
+              {NAV.map(item => (
+                <motion.button key={item.id}
+                  className={`${styles.navItem} ${styles.navSub} ${activeNav === item.id ? styles.navActive : ''}`}
+                  onClick={() => setActiveNav(item.id)}
+                  whileHover={activeNav !== item.id ? { backgroundColor: 'var(--panel-2)' } : {}}
+                  whileTap={{ scale: 0.98 }}>
+                  <span className={styles.navIco}><item.Icon size={17} strokeWidth={1.8} /></span>
+                  <span>{item.label}</span>
+                </motion.button>
+              ))}
+            </nav>
+
+            <div className={styles.sideCard}>
+              <p className={styles.sideCardLabel}>Прогресс курса</p>
+              <div className={styles.sideCardBig}>
+                {completed.length}<span>/ {totalLessons}</span>
+              </div>
+              <p className={styles.sideCardSub}>уроков пройдено</p>
+              <motion.button className={styles.sideCardCta}
+                onClick={() => {
+                  const next = allLessons.find(l => !completed.includes(l.id))
+                  if (next) onOpenLesson(next, next.chapter)
+                }}
+                whileHover={{ translateX: 3 }} whileTap={{ scale: 0.96 }}>
+                <ArrowRight size={18} strokeWidth={2} />
+              </motion.button>
+            </div>
+          </>
+        )}
       </aside>
 
       {/* ── Main content ── */}
       <main className={styles.main}>
-        {activeNav === 'home' && <HomeView user={user} completed={completed} onOpenLesson={onOpenLesson} />}
-        {activeNav === 'progress' && <ProgressView completed={completed} />}
-        {activeNav === 'profile' && <ProfileView user={user} userId={userId} onReset={onReset} onLogout={onLogout} totalPct={totalPct} />}
-        {activeNav === 'achievements' && <AchievementsView completed={completed} />}
+        {section === 'notes' && <NotesBoard userId={userId} />}
+        {section === 'projects' && <ProjectsView userId={userId} />}
+        {isLearning && activeNav === 'home' && <HomeView user={user} completed={completed} onOpenLesson={onOpenLesson} />}
+        {isLearning && activeNav === 'progress' && <ProgressView completed={completed} />}
+        {isLearning && activeNav === 'profile' && <ProfileView user={user} userId={userId} onReset={onReset} onLogout={onLogout} totalPct={totalPct} />}
+        {isLearning && activeNav === 'achievements' && <AchievementsView completed={completed} />}
       </main>
 
-      {/* ── Right column ── */}
+      {/* ── Right column (learning only) ── */}
+      {isLearning && (
       <aside className={styles.rightCol}>
         <div className={styles.userChip}>
           <div>
@@ -161,6 +194,7 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
           <WeeklyPlan completed={completed} onOpenLesson={onOpenLesson} />
         </div>
       </aside>
+      )}
     </div>
   )
 }

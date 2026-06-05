@@ -1,10 +1,16 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import {
+  Home, BarChart3, User, Trophy,
+  Flag, Layers, GitBranch, MessageSquare, Bot,
+  Zap, Flame, Lock, PartyPopper,
+  ArrowRight, RotateCcw,
+} from 'lucide-react'
 import { courseData } from '../data/course'
 import styles from './Dashboard.module.css'
 
 const ACCENTS = ['blue', 'violet', 'amber', 'coral', 'teal']
-const CHAPTER_ICONS = ['🏁', '🗂️', '🌿', '💬', '🤖']
+const CHAPTER_ICONS = [Flag, Layers, GitBranch, MessageSquare, Bot]
 const ACCENT_COLORS = {
   blue:   { bg: '#2f6af6', text: '#fff', bar: 'rgba(255,255,255,.32)', fill: '#fff', soft: '#edf1ff', ink: '#2f6af6' },
   violet: { bg: '#9b5fe6', text: '#fff', bar: 'rgba(255,255,255,.32)', fill: '#fff', soft: '#f2ecff', ink: '#9b5fe6' },
@@ -14,17 +20,17 @@ const ACCENT_COLORS = {
 }
 
 const NAV = [
-  { id: 'home',         icon: '🏠', label: 'Главная' },
-  { id: 'progress',     icon: '📊', label: 'Прогресс' },
-  { id: 'profile',      icon: '👤', label: 'Профиль' },
-  { id: 'achievements', icon: '🏆', label: 'Достижения' },
+  { id: 'home',         Icon: Home,     label: 'Главная' },
+  { id: 'progress',     Icon: BarChart3, label: 'Прогресс' },
+  { id: 'profile',      Icon: User,      label: 'Профиль' },
+  { id: 'achievements', Icon: Trophy,    label: 'Достижения' },
 ]
 
 const ACHIEVEMENTS = [
-  { id: 'first',  icon: '⚡', title: 'Первый шаг',    desc: 'Пройди первый урок',              check: (c) => c.length >= 1 },
-  { id: 'half',   icon: '🔥', title: 'На полпути',    desc: 'Пройди 50% курса',                check: (c) => c.length >= Math.ceil(15 * 0.5) },
-  { id: 'git',    icon: '🌿', title: 'Git-гуру',      desc: 'Завершить главу про Git',         check: (c) => courseData[2].lessons.every(l => c.includes(l.id)) },
-  { id: 'vibe',   icon: '🤖', title: 'Вайбкодер',     desc: 'Пройти весь курс',                check: (c) => c.length >= 15 },
+  { id: 'first',  Icon: Zap,        title: 'Первый шаг',    desc: 'Пройди первый урок',              check: (c) => c.length >= 1 },
+  { id: 'half',   Icon: Flame,      title: 'На полпути',    desc: 'Пройди 50% курса',                check: (c) => c.length >= Math.ceil(15 * 0.5) },
+  { id: 'git',    Icon: GitBranch,  title: 'Git-гуру',      desc: 'Завершить главу про Git',         check: (c) => courseData[2].lessons.every(l => c.includes(l.id)) },
+  { id: 'vibe',   Icon: Bot,        title: 'Вайбкодер',     desc: 'Пройти весь курс',                check: (c) => c.length >= 15 },
 ]
 
 const DAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
@@ -75,7 +81,7 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
               onClick={() => setActiveNav(item.id)}
               whileHover={activeNav !== item.id ? { backgroundColor: 'var(--panel-2)' } : {}}
               whileTap={{ scale: 0.98 }}>
-              <span className={styles.navIco}>{item.icon}</span>
+              <span className={styles.navIco}><item.Icon size={18} strokeWidth={1.8} /></span>
               <span>{item.label}</span>
             </motion.button>
           ))}
@@ -93,7 +99,7 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
               if (next) onOpenLesson(next, next.chapter)
             }}
             whileHover={{ translateX: 3 }} whileTap={{ scale: 0.96 }}>
-            →
+            <ArrowRight size={18} strokeWidth={2} />
           </motion.button>
         </div>
       </aside>
@@ -120,7 +126,7 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
           <h3 className={styles.sectionH}>Продолжи обучение</h3>
           <div className={styles.continueList}>
             {nextLessons.length === 0
-              ? <p style={{ color: 'var(--ink-3)', fontSize: 14 }}>🎉 Курс пройден!</p>
+              ? <p style={{ color: 'var(--ink-3)', fontSize: 14, display: 'flex', alignItems: 'center', gap: 6 }}><PartyPopper size={16} /> Курс пройден!</p>
               : nextLessons.map((lesson, i) => {
                   const chIdx = courseData.findIndex(ch => ch.id === lesson.chapter.id)
                   const accent = ACCENTS[chIdx % ACCENTS.length]
@@ -134,7 +140,7 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: i * 0.08 }}>
                       <div className={styles.continueIco} style={{ background: color.soft, color: color.ink }}>
-                        {CHAPTER_ICONS[chIdx]}
+                        {(() => { const ChIco = CHAPTER_ICONS[chIdx]; return <ChIco size={16} strokeWidth={1.7} /> })()}
                       </div>
                       <div className={styles.continueTx}>
                         <div className={styles.continueName}>{lesson.title}</div>
@@ -163,7 +169,7 @@ function HomeView({ user, completed, onOpenLesson }) {
     <>
       <div className={styles.mainHead}>
         <div>
-          <h1 className={styles.mainH1}>Привет, {user.name}! 👋</h1>
+          <h1 className={styles.mainH1}>Привет, {user.name}!</h1>
           <div className={styles.mainDate}>{getTodayLabel()}</div>
         </div>
       </div>
@@ -189,7 +195,7 @@ function HomeView({ user, completed, onOpenLesson }) {
               whileHover={{ translateY: -3, boxShadow: `0 22px 38px -18px var(--ac)` }}
               whileTap={{ scale: 0.99 }}>
               <div className={styles.chTop}>
-                <div className={styles.chIco}>{CHAPTER_ICONS[i]}</div>
+                <div className={styles.chIco}>{(() => { const ChIco = CHAPTER_ICONS[i]; return <ChIco size={22} strokeWidth={1.7} /> })()}</div>
                 <div className={styles.chBadge}>
                   <b>{prog.done}</b>
                   <small>/ {prog.total}</small>
@@ -204,7 +210,7 @@ function HomeView({ user, completed, onOpenLesson }) {
                     animate={{ width: `${prog.pct}%` }}
                     transition={{ delay: i * 0.07 + 0.3, duration: 0.6, ease: [0.34, 1.4, 0.5, 1] }} />
                 </div>
-                <span className={styles.chOpen}>Открыть →</span>
+                <span className={styles.chOpen} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>Открыть <ArrowRight size={14} strokeWidth={2} /></span>
               </div>
             </motion.div>
           )
@@ -240,7 +246,7 @@ function ProgressView({ completed }) {
           return (
             <div key={chapter.id} className={styles.progressChap}>
               <div className={styles.progressChapHead}>
-                <span className={styles.progressChapIco} style={{ background: color.soft, color: color.ink }}>{CHAPTER_ICONS[i]}</span>
+                <span className={styles.progressChapIco} style={{ background: color.soft, color: color.ink }}>{(() => { const ChIco = CHAPTER_ICONS[i]; return <ChIco size={16} strokeWidth={1.7} /> })()}</span>
                 <span className={styles.progressChapTitle}>{chapter.title}</span>
                 <span className={styles.progressChapPct} style={{ color: color.ink }}>{prog.pct}%</span>
               </div>
@@ -282,7 +288,7 @@ function ProfileView({ user, onReset, onLogout, totalPct }) {
           <div className={styles.profileStatLabel}>курса пройдено</div>
         </div>
         <div className={styles.profileBtns}>
-          <button className={styles.profileBtnGhost} onClick={onReset}>↩ Начать заново</button>
+          <button className={styles.profileBtnGhost} onClick={onReset} style={{ display: 'flex', alignItems: 'center', gap: 6 }}><RotateCcw size={14} strokeWidth={2} /> Начать заново</button>
           <button className={styles.profileBtnGhost} onClick={onLogout}>Выйти</button>
         </div>
       </div>
@@ -305,7 +311,7 @@ function AchievementsView({ completed }) {
               className={`${styles.achieveCard} ${unlocked ? styles.achieveUnlocked : ''}`}
               initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.08 }}>
-              <div className={styles.achieveIco}>{unlocked ? a.icon : '🔒'}</div>
+              <div className={styles.achieveIco}>{unlocked ? <a.Icon size={28} strokeWidth={1.6} /> : <Lock size={28} strokeWidth={1.6} />}</div>
               <div className={styles.achieveTitle}>{a.title}</div>
               <div className={styles.achieveDesc}>{a.desc}</div>
             </motion.div>

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import { ArrowLeft, ArrowRight } from 'lucide-react'
 import styles from './Onboarding.module.css'
 
 const ROLES = [
@@ -120,21 +121,21 @@ export default function Onboarding({ onComplete, initialName = '' }) {
 
           <div style={{ display: 'flex', gap: 10 }}>
             {step > 1 && (
-              <button className={styles.btnBack} onClick={back}>← Назад</button>
+              <button className={styles.btnBack} onClick={back} style={{ display: 'flex', alignItems: 'center', gap: 6 }}><ArrowLeft size={15} strokeWidth={2} /> Назад</button>
             )}
             {step < 3 && (
               <motion.button className={styles.btnNext}
                 onClick={next}
                 disabled={step === 1 ? !name.trim() : !finalRole.trim()}
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                Продолжить →
+                <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>Продолжить <ArrowRight size={15} strokeWidth={2} /></span>
               </motion.button>
             )}
             {step === 3 && (
               <motion.button className={styles.btnNext}
                 onClick={handleStart}
                 whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                Начать обучение →
+                <span style={{ display: 'flex', alignItems: 'center', gap: 6 }}>Начать обучение <ArrowRight size={15} strokeWidth={2} /></span>
               </motion.button>
             )}
           </div>

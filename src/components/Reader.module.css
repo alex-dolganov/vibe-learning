@@ -425,6 +425,9 @@
 }
 
 .navBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 11px 20px;
   border: 1.5px solid var(--line-2);
   background: var(--panel-2);
@@ -441,6 +444,9 @@
 .navBtn:disabled { opacity: .3; cursor: not-allowed; }
 
 .navBtnNext {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   padding: 11px 20px;
   background: var(--ink);
   color: #fff;

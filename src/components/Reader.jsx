@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
+import { ArrowLeft, ArrowRight, Check, Menu } from 'lucide-react'
 import { courseData } from '../data/course'
 import styles from './Reader.module.css'
 
@@ -61,7 +62,7 @@ export default function Reader({ user, userId, initialLesson, initialChapter, on
       {/* ── Header ── */}
       <header className={styles.top}>
         <button className={styles.iconBtn} onClick={onBack} title="Назад">
-          ←
+          <ArrowLeft size={18} strokeWidth={2} />
         </button>
         <div className={styles.topTitle}>
           <span className={styles.topTitleMain}>{courseData[activeChapterIdx]?.title}</span>
@@ -76,7 +77,7 @@ export default function Reader({ user, userId, initialLesson, initialChapter, on
           <span className={styles.topPct}>{progress}%</span>
         </div>
         <button className={styles.iconBtn} onClick={() => setSideOpen(s => !s)} title="Содержание" style={{ display: 'none' }} aria-label="menu" data-hamb>
-          ☰
+          <Menu size={18} strokeWidth={2} />
         </button>
         <div className={styles.topAvatar}>{getInitials(user.name)}</div>
       </header>
@@ -104,7 +105,7 @@ export default function Reader({ user, userId, initialLesson, initialChapter, on
                       className={`${styles.lessonBtn} ${isActive ? styles.lessonActive : ''}`}
                       onClick={() => goTo({ ...lesson, chapter })}>
                       <span className={`${styles.tick} ${isDone ? styles.tickDone : ''}`}>
-                        {isDone ? '✓' : ''}
+                        {isDone ? <Check size={11} strokeWidth={2.5} /> : ''}
                       </span>
                       <span className={styles.lessonBtnTitle}>{lesson.title}</span>
                     </button>
@@ -162,23 +163,23 @@ export default function Reader({ user, userId, initialLesson, initialChapter, on
                     <motion.button className={styles.doneBtn}
                       onClick={() => markComplete(activeLesson.id)}
                       whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                      ✓ Отметить как пройденное
+                      <Check size={15} strokeWidth={2.5} /> Отметить как пройденное
                     </motion.button>
                   ) : (
-                    <span className={styles.doneBadge}>✓ Пройдено</span>
+                    <span className={styles.doneBadge}><Check size={14} strokeWidth={2.5} /> Пройдено</span>
                   )}
 
                   <div className={styles.nav}>
                     <button className={styles.navBtn}
                       onClick={() => prevLesson && goTo(prevLesson)}
                       disabled={!prevLesson}>
-                      ← Назад
+                      <ArrowLeft size={15} strokeWidth={2} /> Назад
                     </button>
                     {nextLesson && (
                       <motion.button className={styles.navBtnNext}
                         onClick={() => { markComplete(activeLesson.id); goTo(nextLesson) }}
                         whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                        {nextLesson.title} →
+                        {nextLesson.title} <ArrowRight size={15} strokeWidth={2} />
                       </motion.button>
                     )}
                   </div>

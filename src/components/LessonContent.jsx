@@ -1,4 +1,5 @@
 import ReactMarkdown from 'react-markdown'
+import { ArrowLeft, ArrowRight, Check } from 'lucide-react'
 import styles from './LessonContent.module.css'
 
 export default function LessonContent({ lesson, isCompleted, onComplete, onNext, onPrev, nextTitle }) {
@@ -33,12 +34,12 @@ export default function LessonContent({ lesson, isCompleted, onComplete, onNext,
 
       <div className={styles.footer}>
         {!isCompleted && (
-          <button className={styles.completeBtn} onClick={onComplete}>
-            Отметить как пройденное
+          <button className={styles.completeBtn} onClick={onComplete} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <Check size={15} strokeWidth={2.5} /> Отметить как пройденное
           </button>
         )}
         {isCompleted && (
-          <span className={styles.completedBadge}>Пройдено</span>
+          <span className={styles.completedBadge} style={{ display: 'inline-flex', alignItems: 'center', gap: 5 }}><Check size={14} strokeWidth={2.5} /> Пройдено</span>
         )}
 
         <div className={styles.nav}>
@@ -46,12 +47,13 @@ export default function LessonContent({ lesson, isCompleted, onComplete, onNext,
             className={styles.navBtn}
             onClick={onPrev}
             disabled={!onPrev}
+            style={{ display: 'flex', alignItems: 'center', gap: 6 }}
           >
-            ← Назад
+            <ArrowLeft size={15} strokeWidth={2} /> Назад
           </button>
           {onNext && (
-            <button className={styles.navBtnNext} onClick={() => { onComplete(); onNext() }}>
-              {nextTitle ? `${nextTitle} →` : 'Следующий урок →'}
+            <button className={styles.navBtnNext} onClick={() => { onComplete(); onNext() }} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              {nextTitle || 'Следующий урок'} <ArrowRight size={15} strokeWidth={2} />
             </button>
           )}
         </div>

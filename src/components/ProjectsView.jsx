@@ -29,6 +29,7 @@ export default function ProjectsView({ userId }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [editing, setEditing] = useState(null)        // null | 'new' | project
+  const [viewing, setViewing] = useState(null)        // null | project (детальный попап)
   const [form, setForm] = useState(EMPTY_FORM)
   const [tagInput, setTagInput] = useState('')
 
@@ -165,6 +166,7 @@ export default function ProjectsView({ userId }) {
         <div className={styles.gallery}>
           {projects.map((p, i) => (
             <motion.div key={p.id} className={styles.projCard}
+              onClick={() => setViewing(p)}
               initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.04 }}
               whileHover={{ translateY: -3, boxShadow: '0 18px 34px -18px rgba(20,25,60,.3)' }}>
@@ -172,7 +174,7 @@ export default function ProjectsView({ userId }) {
                 <span className={styles.statusBadge} style={{ background: STATUS_COLOR[p.status] }}>
                   {PROJECT_STATUS_LABELS[p.status] || p.status}
                 </span>
-                <div className={styles.projActions}>
+                <div className={styles.projActions} onClick={e => e.stopPropagation()}>
                   {p.link && (
                     <a href={p.link} target="_blank" rel="noreferrer" title="Открыть"><ExternalLink size={14} strokeWidth={2} /></a>
                   )}
@@ -193,6 +195,50 @@ export default function ProjectsView({ userId }) {
           ))}
         </div>
       )}
+
+      {/* ── Detail popup ── */}
+      <AnimatePresence>
+        {viewing && (
+          <motion.div className={styles.overlay}
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            onClick={() => setViewing(null)}>
+            <motion.div className={styles.modal}
+              initial={{ opacity: 0, y: 20, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: 12, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              onClick={e => e.stopPropagation()}>
+              <div className={styles.modalHead}>
+                <span className={styles.statusBadge} style={{ background: STATUS_COLOR[viewing.status] }}>
+                  {PROJECT_STATUS_LABELS[viewing.status] || viewing.status}
+                </span>
+                <button onClick={() => setViewing(null)}><X size={18} /></button>
+              </div>
+
+              <h2 className={styles.detailName}>{viewing.name}</h2>
+              {viewing.description && <p className={styles.detailDesc}>{viewing.description}</p>}
+
+              {viewing.stack?.length > 0 && (
+                <div className={styles.chips} style={{ marginTop: 16 }}>
+                  {viewing.stack.map(t => (
+                    <span key={t} className={styles.chip} style={{ background: `${techColor(t)}22`, color: techColor(t) }}>{t}</span>
+                  ))}
+                </div>
+              )}
+
+              <div className={styles.detailFoot}>
+                {viewing.link && (
+                  <a className={styles.detailLink} href={viewing.link} target="_blank" rel="noreferrer">
+                    Открыть <ExternalLink size={15} strokeWidth={2} />
+                  </a>
+                )}
+                <button className={styles.modalCancel} style={{ marginLeft: 'auto' }}
+                  onClick={() => { const p = viewing; setViewing(null); openEdit(p) }}>
+                  <Pencil size={14} strokeWidth={2} /> Редактировать
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ── Modal ── */}
       <AnimatePresence>

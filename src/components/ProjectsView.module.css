@@ -388,6 +388,54 @@
   cursor: pointer;
 }
 
+/* ── Detail popup ── */
+.detailName {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin: 4px 0 12px;
+}
+
+.detailDesc {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin: 0;
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+.detailFoot {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.detailLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: var(--blue-soft);
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.detailLink:hover { text-decoration: underline; }
+
+.modalCancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
 /* ── States ── */
 .state { padding: 40px 8px; max-width: 560px; }
 .stateTitle { font-size: 17px; font-weight: 600; color: var(--ink); margin: 0 0 6px; }

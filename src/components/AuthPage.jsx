@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { supabase } from '../lib/supabase'
+import Logo from './Logo'
 import styles from './AuthPage.module.css'
 
 const features = [
@@ -51,9 +52,9 @@ export default function AuthPage() {
         {/* ── Left promo ── */}
         <div className={styles.promo}>
           <div className={styles.logo}>
-            <div className={styles.logoMark}>VC</div>
+            <Logo size={34} variant="mono" className={styles.logoMark} />
             <div className={styles.logoName}>
-              VibeCoder Academy
+              Build&Vibe
               <small>Понимай IT изнутри</small>
             </div>
           </div>

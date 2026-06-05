@@ -60,14 +60,7 @@
 .logoMark {
   width: 34px;
   height: 34px;
-  border-radius: 11px;
-  background: rgba(255,255,255,.22);
-  display: grid;
-  place-items: center;
   flex-shrink: 0;
-  font-size: 12px;
-  font-weight: 800;
-  font-family: 'Space Grotesk', sans-serif;
 }
 
 .logoName {

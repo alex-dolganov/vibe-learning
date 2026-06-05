@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
+import Logo from './Logo'
 import styles from './Onboarding.module.css'
 
 const ROLES = [
@@ -41,8 +42,8 @@ export default function Onboarding({ onComplete, initialName = '' }) {
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       >
         <div className={styles.logo}>
-          <div className={styles.logoMark}>VC</div>
-          <span className={styles.logoName}>VibeCoder Academy</span>
+          <Logo size={32} variant="color" className={styles.logoMark} />
+          <span className={styles.logoName}>Build&Vibe</span>
         </div>
 
         <div className={styles.stepWrap}>

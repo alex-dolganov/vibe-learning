@@ -7,6 +7,7 @@ import {
   ArrowRight, RotateCcw,
 } from 'lucide-react'
 import { courseData } from '../data/course'
+import { getActivity, localDayKey } from '../lib/progress'
 import Logo from './Logo'
 import styles from './Dashboard.module.css'
 
@@ -109,7 +110,7 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
       <main className={styles.main}>
         {activeNav === 'home' && <HomeView user={user} completed={completed} onOpenLesson={onOpenLesson} />}
         {activeNav === 'progress' && <ProgressView completed={completed} />}
-        {activeNav === 'profile' && <ProfileView user={user} onReset={onReset} onLogout={onLogout} totalPct={totalPct} />}
+        {activeNav === 'profile' && <ProfileView user={user} userId={userId} onReset={onReset} onLogout={onLogout} totalPct={totalPct} />}
         {activeNav === 'achievements' && <AchievementsView completed={completed} />}
       </main>
 
@@ -273,7 +274,8 @@ function ProgressView({ completed }) {
 }
 
 /* ── Profile view ── */
-function ProfileView({ user, onReset, onLogout, totalPct }) {
+function ProfileView({ user, userId, onReset, onLogout, totalPct }) {
+  const activity = getActivity(userId)
   return (
     <>
       <div className={styles.mainHead}>
@@ -293,8 +295,106 @@ function ProfileView({ user, onReset, onLogout, totalPct }) {
           <button className={styles.profileBtnGhost} onClick={onLogout}>Выйти</button>
         </div>
       </div>
+
+      <div className={styles.activityCard}>
+        <h3 className={styles.activityH}>Активность обучения</h3>
+        <ActivityHeatmap activity={activity} />
+      </div>
     </>
   )
+}
+
+/* ── Activity heatmap (GitHub-style) ── */
+const HEAT_COLORS = ['#eaecf4', '#cdddf3', '#9dbce9', '#6f97d4', '#4f72b0']
+const HEAT_WEEKS = 18
+const WEEKDAY_LABELS = ['', 'Пн', '', 'Ср', '', 'Пт', '']
+const MONTHS_SHORT = ['янв', 'фев', 'мар', 'апр', 'май', 'июн', 'июл', 'авг', 'сен', 'окт', 'ноя', 'дек']
+
+function heatLevel(count) {
+  if (!count) return 0
+  if (count === 1) return 1
+  if (count === 2) return 2
+  if (count === 3) return 3
+  return 4
+}
+
+function ActivityHeatmap({ activity }) {
+  const now = new Date()
+  const end = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+  // Понедельник = 0 ... Воскресенье = 6
+  const endDow = (end.getDay() + 6) % 7
+  const start = new Date(end)
+  start.setDate(end.getDate() - endDow - (HEAT_WEEKS - 1) * 7)
+
+  // Колонки по неделям, в каждой 7 дней (Пн→Вс)
+  const weeks = []
+  const cursor = new Date(start)
+  for (let w = 0; w < HEAT_WEEKS; w++) {
+    const days = []
+    let monthLabel = ''
+    for (let d = 0; d < 7; d++) {
+      const isFuture = cursor > end
+      const key = localDayKey(cursor)
+      const count = activity[key] || 0
+      if (d === 0 && cursor.getDate() <= 7) monthLabel = MONTHS_SHORT[cursor.getMonth()]
+      days.push({ key, count: isFuture ? 0 : count, isFuture, date: new Date(cursor) })
+      cursor.setDate(cursor.getDate() + 1)
+    }
+    weeks.push({ days, monthLabel })
+  }
+
+  const total = Object.values(activity).reduce((a, b) => a + b, 0)
+
+  return (
+    <div className={styles.heat}>
+      <div className={styles.heatScroll}>
+        <div className={styles.heatMonths}>
+          {weeks.map((wk, i) => (
+            <span key={i} className={styles.heatMonth}>{wk.monthLabel}</span>
+          ))}
+        </div>
+        <div className={styles.heatBody}>
+          <div className={styles.heatDays}>
+            {WEEKDAY_LABELS.map((l, i) => <span key={i}>{l}</span>)}
+          </div>
+          <div className={styles.heatGrid}>
+            {weeks.map((wk, wi) => (
+              <div key={wi} className={styles.heatCol}>
+                {wk.days.map((day) => (
+                  <div
+                    key={day.key}
+                    className={styles.heatCell}
+                    style={{
+                      background: day.isFuture ? 'transparent' : HEAT_COLORS[heatLevel(day.count)],
+                      visibility: day.isFuture ? 'hidden' : 'visible',
+                    }}
+                    title={day.isFuture ? '' : `${day.key}: ${day.count} ${plural(day.count)}`}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className={styles.heatFoot}>
+        <span className={styles.heatTotal}>{total} {plural(total)} за ~4 месяца</span>
+        <div className={styles.heatLegend}>
+          <span>меньше</span>
+          {HEAT_COLORS.map((c, i) => (
+            <div key={i} className={styles.heatCell} style={{ background: c }} />
+          ))}
+          <span>больше</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function plural(n) {
+  const mod10 = n % 10, mod100 = n % 100
+  if (mod10 === 1 && mod100 !== 11) return 'урок'
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return 'урока'
+  return 'уроков'
 }
 
 /* ── Achievements view ── */

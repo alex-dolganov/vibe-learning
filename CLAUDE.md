@@ -81,6 +81,7 @@ public/
 |------|------------|
 | `vibecoder_user_${userId}` | `{ name, role, goal }` — результат онбординга |
 | `vibecoder_progress_${userId}` | массив строк — ID пройденных уроков (`"1-1"`, `"2-3"` и т.д.) |
+| `vibecoder_activity_${userId}` | `{ "ГГГГ-ММ-ДД": число }` — активность по дням для heatmap в профиле (см. `lib/progress.js`) |
 
 Профиль и прогресс хранятся **только в localStorage**, не в базе Supabase. Supabase отвечает лишь за аутентификацию.
 

@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import { ArrowLeft, ArrowRight, Check, Menu } from 'lucide-react'
 import { courseData } from '../data/course'
+import { recordCompletion } from '../lib/progress'
 import styles from './Reader.module.css'
 
 const ACCENTS = ['blue', 'violet', 'amber', 'coral', 'teal']
@@ -49,6 +50,7 @@ export default function Reader({ user, userId, initialLesson, initialChapter, on
       const next = [...completed, id]
       setCompleted(next)
       saveCompleted(userId, next)
+      recordCompletion(userId, next)
     }
   }
 

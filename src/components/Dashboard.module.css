@@ -726,3 +726,104 @@
   .sideCard { display: none; }
   .main { padding: 20px 20px 32px; }
 }
+
+/* ── Activity heatmap ── */
+.activityCard {
+  margin-top: 18px;
+  background: var(--panel-2);
+  border-radius: 24px;
+  padding: 24px 28px;
+  max-width: 620px;
+}
+
+.activityH {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -.01em;
+  color: var(--ink);
+  margin: 0 0 18px;
+}
+
+.heat {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.heatScroll {
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.heatMonths {
+  display: flex;
+  gap: 3px;
+  margin-left: 26px;
+  margin-bottom: 5px;
+}
+
+.heatMonth {
+  width: 13px;
+  font-size: 10px;
+  color: var(--ink-3);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.heatBody {
+  display: flex;
+  gap: 6px;
+}
+
+.heatDays {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.heatDays span {
+  height: 13px;
+  font-size: 9px;
+  line-height: 13px;
+  color: var(--ink-3);
+  width: 20px;
+}
+
+.heatGrid {
+  display: flex;
+  gap: 3px;
+}
+
+.heatCol {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.heatCell {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+.heatFoot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.heatTotal {
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.heatLegend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  color: var(--ink-3);
+}

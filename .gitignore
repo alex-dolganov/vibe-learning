@@ -21,6 +21,9 @@ dist-ssr
 /*.jpg
 /*.jpeg
 
+# Claude Code personal/local settings (not for the repo)
+.claude/settings.local.json
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

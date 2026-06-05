@@ -7,6 +7,7 @@ import {
   ArrowRight, RotateCcw,
 } from 'lucide-react'
 import { courseData } from '../data/course'
+import Logo from './Logo'
 import styles from './Dashboard.module.css'
 
 const ACCENTS = ['blue', 'violet', 'amber', 'coral', 'teal']
@@ -26,11 +27,13 @@ const NAV = [
   { id: 'achievements', Icon: Trophy,    label: 'Достижения' },
 ]
 
+const TOTAL_LESSONS = courseData.reduce((a, c) => a + c.lessons.length, 0)
+
 const ACHIEVEMENTS = [
   { id: 'first',  Icon: Zap,        title: 'Первый шаг',    desc: 'Пройди первый урок',              check: (c) => c.length >= 1 },
-  { id: 'half',   Icon: Flame,      title: 'На полпути',    desc: 'Пройди 50% курса',                check: (c) => c.length >= Math.ceil(15 * 0.5) },
+  { id: 'half',   Icon: Flame,      title: 'На полпути',    desc: 'Пройди 50% курса',                check: (c) => c.length >= Math.ceil(TOTAL_LESSONS * 0.5) },
   { id: 'git',    Icon: GitBranch,  title: 'Git-гуру',      desc: 'Завершить главу про Git',         check: (c) => courseData[2].lessons.every(l => c.includes(l.id)) },
-  { id: 'vibe',   Icon: Bot,        title: 'Вайбкодер',     desc: 'Пройти весь курс',                check: (c) => c.length >= 15 },
+  { id: 'vibe',   Icon: Bot,        title: 'Вайбкодер',     desc: 'Пройти весь курс',                check: (c) => c.length >= TOTAL_LESSONS },
 ]
 
 const DAYS = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб']
@@ -68,9 +71,9 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
       {/* ── Left sidebar ── */}
       <aside className={styles.side}>
         <div className={styles.logo}>
-          <div className={styles.logoMark}>VC</div>
+          <Logo size={32} variant="color" className={styles.logoMark} />
           <div className={styles.logoName}>
-            VibeCoder<br /><small>Academy</small>
+            Build<br /><small>&Vibe</small>
           </div>
         </div>
 

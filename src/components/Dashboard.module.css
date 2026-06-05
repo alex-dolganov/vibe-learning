@@ -37,17 +37,12 @@
 
 .logoName {
   font-weight: 800;
-  font-size: 14px;
-  line-height: 1.3;
-  letter-spacing: -.01em;
-  color: var(--ink);
+  font-size: 17px;
+  line-height: 1;
+  letter-spacing: -.02em;
+  color: var(--blue);
   font-family: 'Space Grotesk', sans-serif;
-}
-
-.logoName small {
-  font-size: 11px;
-  color: var(--ink-3);
-  font-weight: 600;
+  white-space: nowrap;
 }
 
 .navList {

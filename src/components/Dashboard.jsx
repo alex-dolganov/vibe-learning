@@ -72,9 +72,7 @@ export default function Dashboard({ user, userId, onLogout, onReset, onOpenLesso
       <aside className={styles.side}>
         <div className={styles.logo}>
           <Logo size={32} variant="color" className={styles.logoMark} />
-          <div className={styles.logoName}>
-            Build<br /><small>&Vibe</small>
-          </div>
+          <div className={styles.logoName}>Build&Vibe</div>
         </div>
 
         <nav className={styles.navList}>
